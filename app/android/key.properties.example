@@ -1,0 +1,30 @@
+# ==========================================================================
+# Release signing — copy to android/key.properties and fill in.
+#
+# key.properties and *.jks are BOTH gitignored, and must stay that way. The
+# upload key is what proves a build came from you; anyone holding it and the
+# password can publish as you. Losing it is almost as bad — without Play App
+# Signing enrolment you can never update the listing again.
+#
+# Back the .jks up somewhere that is not this machine and not this repository.
+# ==========================================================================
+
+# Create the keystore once (25 years, well past anything you will ship):
+#
+#   keytool -genkey -v \
+#     -keystore %USERPROFILE%\agentflow-upload.jks \
+#     -storetype JKS \
+#     -keyalg RSA -keysize 2048 -validity 10000 \
+#     -alias agentflow
+#
+# It asks for a password and some identity fields. Only the password matters
+# for signing; the rest is never shown to users.
+
+# Absolute path is safest. Relative paths resolve from android/, so a keystore
+# stored beside this file would just be "agentflow-upload.jks".
+storeFile=C:\\Users\\YOU\\agentflow-upload.jks
+
+storePassword=your-keystore-password
+keyAlias=agentflow
+# Usually the same as storePassword unless keytool asked for a separate one.
+keyPassword=your-key-password

@@ -44,6 +44,19 @@ async def register_device(
 @router.delete(
     "",
     status_code=status.HTTP_204_NO_CONTENT,
+    # response_model=None is load-bearing, not decoration.
+    #
+    # FastAPI infers the response model from the return annotation, and older
+    # versions treat `-> None` as the model `NoneType`, which is a truthy
+    # class. It then asserts that a 204 declares no body and the import fails
+    # outright:
+    #
+    #     AssertionError: Status code 204 must not have a response body
+    #
+    # Newer versions special-case NoneType, so this route imported fine on a
+    # developer machine and killed the container on a build server pinned one
+    # minor version back. Saying it explicitly is correct on every version.
+    response_model=None,
     summary="Forget this device (sign-out)",
 )
 async def unregister_device(

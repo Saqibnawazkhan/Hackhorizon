@@ -1,45 +1,69 @@
+# ==========================================================================
+# AgentFlow backend — direct dependencies
+#
+# These versions are the ones the application is actually developed and tested
+# against, verified against the working virtualenv rather than written by hand.
+# requirements.lock.txt holds the full transitive closure (109 packages) and is
+# what a reproducible deploy should install.
+#
+# THIS FILE DRIFTED ONCE AND IT COST A DEPLOYMENT. It pinned fastapi 0.115.6
+# while the venv ran 0.141.1, langgraph 0.2.60 against 1.2.11, and anthropic
+# 0.42.0 against 1.2.0 — two of those a major version apart. The build server
+# installed the pins, imported an application that had never been run against
+# them, and died on an assertion no local run could reach:
+#
+#     AssertionError: Status code 204 must not have a response body
+#
+# If you upgrade a package, upgrade it here AND regenerate the lock:
+#     pip install -U <package>
+#     pip freeze > requirements.lock.txt
+# ==========================================================================
+
 # ---- Web ----
-fastapi==0.115.6
-uvicorn[standard]==0.34.0
+fastapi==0.141.1
+uvicorn[standard]==0.52.4
 python-multipart==0.0.20
-websockets==14.1
+websockets==15.0.1
 
 # ---- Schemas / config ----
-pydantic==2.10.4
-pydantic-settings==2.7.0
-email-validator==2.2.0
+pydantic==2.13.5
+pydantic-settings==2.15.0
+email-validator==2.3.0
 
 # ---- Agent ----
-langgraph==0.2.60
-langgraph-checkpoint-postgres==2.0.9
-anthropic==0.42.0
+langgraph==1.2.11
+langgraph-checkpoint-postgres==3.1.2
+anthropic==1.2.0
 
-# ---- Data ----
-sqlalchemy==2.0.36
-psycopg[binary,pool]==3.2.3
-alembic==1.14.0
-supabase==2.11.0
+# ---- Database ----
+sqlalchemy==2.0.52
+psycopg[binary,pool]==3.3.4
 
-# ---- Auth ----
-pyjwt[crypto]==2.10.1
+# Note: no alembic. The schema is plain SQL in migrations/, applied by
+# scripts/apply_migrations.py through psycopg. Nothing imports alembic.
 
-# ---- PDF ----
-reportlab==4.2.5
+# ---- Supabase (auth JWKS, storage) ----
+supabase==2.31.0
+pyjwt[crypto]==2.13.0
 
-# ---- Import ----
-pandas==2.2.3
+# ---- Documents ----
+reportlab==5.0.1
+# Spreadsheet import reads .xlsx directly through openpyxl. pandas was pinned
+# here for a long time and imported nowhere — ~30 MB of build time and image
+# size for a dependency the code does not have.
 openpyxl==3.1.5
 
 # ---- Notifications ----
-firebase-admin==6.6.0
-httpx==0.27.2
+firebase-admin==7.5.0
 
-# ---- Config / util ----
+# ---- Utilities ----
+httpx==0.28.1
 python-dotenv==1.0.1
 pyyaml==6.0.2
-tenacity==9.0.0
 structlog==24.4.0
 
-# ---- Dev / test ----
-pytest==8.3.4
-pytest-asyncio==0.25.0
+# ---- Tests ----
+# Installed in production too. They are small, and being able to run the suite
+# against the deployed image is worth more than the few seconds it costs.
+pytest==9.1.1
+pytest-asyncio==1.4.0
