@@ -1,19 +1,41 @@
+# ==========================================================================
+# AgentFlow backend
+#
+# The first section is the one that matters. Everything in it can be used to
+# spend money or read the production database. A secret pushed to GitHub is
+# scraped within minutes and stays in the history forever -- rotating it is
+# then the only remedy -- so it must never go up at all.
+#
+# Railway, Render and Fly all take these as dashboard variables. None of them
+# reads a .env from the repository, so committing one buys nothing.
+# ==========================================================================
 .env
+.env.*
+!.env.example
+
+firebase-service-account.json
+*-firebase-adminsdk-*.json
+serviceAccountKey.json
+
+# -- python ---------------------------------------------------------------
 .venv/
 venv/
 __pycache__/
 *.py[cod]
+*.egg-info/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
-*.egg-info/
-dist/
-build/
+htmlcov/
+.coverage
+
+# -- editors / os ---------------------------------------------------------
+.idea/
+.vscode/
+*.swp
 .DS_Store
-storage_tmp/
+Thumbs.db
 
-# Can send push and read the Firebase project. Never commit.
-firebase-service-account.json
-
-# Any service account key downloaded under its default name.
-*-firebase-adminsdk-*.json
+# -- local scratch --------------------------------------------------------
+*.log
+po_overlap_check.pdf

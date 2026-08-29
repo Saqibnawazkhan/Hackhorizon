@@ -1,0 +1,37 @@
+# Line endings.
+#
+# Development happens on Windows; deployment happens on Linux. Git's autocrlf
+# would hand these files to the build host with CRLF, and a few of them break
+# on a trailing carriage return rather than ignoring it:
+#
+#   Procfile          -- the \r lands inside the port argument, so uvicorn is
+#                        asked to bind "$PORT\r" and the process never starts
+#   runtime.txt       -- the version string stops matching a known runtime
+#   .python-version   -- same
+#   *.sh              -- /bin/sh reports "bad interpreter: no such file"
+#
+# Forcing LF on them costs nothing on Windows: no editor here cares, and
+# nothing in this project reads them locally.
+
+* text=auto
+
+Procfile        text eol=lf
+runtime.txt     text eol=lf
+.python-version text eol=lf
+*.sh            text eol=lf
+*.yaml          text eol=lf
+*.yml           text eol=lf
+
+# Binary, so Git never tries to translate anything inside them.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.ttf binary
+*.otf binary
+*.woff binary
+*.woff2 binary
+*.jks binary
+*.keystore binary
