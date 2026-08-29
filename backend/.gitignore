@@ -1,0 +1,19 @@
+.env
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+build/
+.DS_Store
+storage_tmp/
+
+# Can send push and read the Firebase project. Never commit.
+firebase-service-account.json
+
+# Any service account key downloaded under its default name.
+*-firebase-adminsdk-*.json

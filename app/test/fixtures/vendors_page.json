@@ -1,0 +1,119 @@
+{
+  "items": [
+    {
+      "id": "00000000-0000-0000-0000-0000000000b3",
+      "name": "Alpha Traders",
+      "legal_name": "Alpha Trading Company",
+      "email": "info@alphatraders.example",
+      "phone": "+92 51 888 999 000",
+      "address": null,
+      "category": "IT hardware",
+      "status": "verified",
+      "verified_at": "2026-02-09T19:09:37.803282+00:00",
+      "default_delivery_days": 12,
+      "default_warranty_months": 12,
+      "last_published_at": "2026-08-26T19:09:37.803282+00:00",
+      "created_at": "2026-08-28T19:09:37.803282+00:00",
+      "reliability": {
+        "has_history": true,
+        "orders_fulfilled": 11,
+        "on_time_rate": 0.94,
+        "quantity_accuracy": 0.94,
+        "cancellations": 2,
+        "late_deliveries": 3,
+        "score": 4.2,
+        "display": "4.2"
+      },
+      "flags": []
+    },
+    {
+      "id": "00000000-0000-0000-0000-0000000000b4",
+      "name": "Fresh Imports",
+      "legal_name": "Fresh Imports Trading",
+      "email": "hello@freshimports.example",
+      "phone": "+92 42 300 400 500",
+      "address": null,
+      "category": "IT hardware",
+      "status": "verified",
+      "verified_at": "2026-08-23T19:09:37.803282+00:00",
+      "default_delivery_days": 9,
+      "default_warranty_months": 18,
+      "last_published_at": "2026-08-28T15:09:37.803282+00:00",
+      "created_at": "2026-08-28T19:09:37.803282+00:00",
+      "reliability": {
+        "has_history": false,
+        "orders_fulfilled": 0,
+        "on_time_rate": null,
+        "quantity_accuracy": null,
+        "cancellations": 0,
+        "late_deliveries": 0,
+        "score": null,
+        "display": "No history yet"
+      },
+      "flags": []
+    },
+    {
+      "id": "00000000-0000-0000-0000-0000000000b2",
+      "name": "Metro Computers",
+      "legal_name": "Metro Computers (Pvt) Ltd",
+      "email": "orders@metrocomputers.example",
+      "phone": "+92 21 555 666 777",
+      "address": null,
+      "category": "IT hardware",
+      "status": "verified",
+      "verified_at": "2026-05-30T19:09:37.803282+00:00",
+      "default_delivery_days": 10,
+      "default_warranty_months": 12,
+      "last_published_at": "2026-08-27T19:09:37.803282+00:00",
+      "created_at": "2026-08-28T19:09:37.803282+00:00",
+      "reliability": {
+        "has_history": true,
+        "orders_fulfilled": 17,
+        "on_time_rate": 0.95,
+        "quantity_accuracy": 0.95,
+        "cancellations": 1,
+        "late_deliveries": 2,
+        "score": 4.5,
+        "display": "4.5"
+      },
+      "flags": [
+        {
+          "reason": "late_deliveries",
+          "detail": "2 late deliveries \u00b7 flagged by agent",
+          "threshold": "VENDOR_FLAG_AFTER_LATE_DELIVERIES = 2",
+          "raised_at": "2026-08-26T19:09:37.803282+00:00",
+          "resolved_at": null
+        }
+      ]
+    },
+    {
+      "id": "00000000-0000-0000-0000-0000000000b1",
+      "name": "TechSupplies Ltd",
+      "legal_name": "TechSupplies Private Limited",
+      "email": "sales@techsupplies.example",
+      "phone": "+92 42 111 222 333",
+      "address": null,
+      "category": "IT hardware",
+      "status": "verified",
+      "verified_at": "2026-04-30T19:09:37.803282+00:00",
+      "default_delivery_days": 7,
+      "default_warranty_months": 24,
+      "last_published_at": "2026-08-28T16:09:37.803282+00:00",
+      "created_at": "2026-08-28T19:09:37.803282+00:00",
+      "reliability": {
+        "has_history": true,
+        "orders_fulfilled": 24,
+        "on_time_rate": 0.96,
+        "quantity_accuracy": 0.96,
+        "cancellations": 0,
+        "late_deliveries": 1,
+        "score": 4.8,
+        "display": "4.8"
+      },
+      "flags": []
+    }
+  ],
+  "total": 4,
+  "limit": 20,
+  "offset": 0
+}

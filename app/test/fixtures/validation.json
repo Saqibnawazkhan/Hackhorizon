@@ -1,0 +1,55 @@
+{
+  "workflow_id": "8f84f296-c63e-427f-9868-115c67124501",
+  "purchase_order_id": "318a350d-63f1-4058-bcc6-0567583c7127",
+  "attempt": 1,
+  "max_attempts": 3,
+  "passed": true,
+  "checks": [
+    {
+      "check": "budget_compliance",
+      "title": "Budget compliance",
+      "actual": "PKR 8,700,000.00",
+      "passed": true,
+      "message": "Total PKR 8,700,000.00 is within the PKR 10,000,000.00 budget (PKR 1,300,000.00 remaining).",
+      "outcome": "passed",
+      "expected": "<= PKR 10,000,000.00"
+    },
+    {
+      "check": "quantity_correctness",
+      "title": "Quantity correctness",
+      "actual": "Dell Latitude 5550 laptop x 50",
+      "passed": true,
+      "message": "All 1 line item(s) match the request (50 unit(s) total).",
+      "outcome": "passed",
+      "expected": "Dell Latitude 5550 laptop x 50"
+    },
+    {
+      "check": "supplier_consistency",
+      "title": "Supplier consistency",
+      "actual": "TechSupplies Ltd @ PKR 8,700,000.00",
+      "passed": true,
+      "message": "PO terms match TechSupplies Ltd's quoted snapshot.",
+      "outcome": "passed",
+      "expected": "TechSupplies Ltd @ PKR 8,700,000.00"
+    },
+    {
+      "check": "required_fields",
+      "title": "Totals arithmetic",
+      "actual": "PKR 8,700,000.00",
+      "passed": true,
+      "message": "Line items, subtotal and total agree (PKR 8,700,000.00).",
+      "outcome": "passed",
+      "expected": "PKR 8,700,000.00"
+    },
+    {
+      "check": "required_fields",
+      "title": "Required fields complete",
+      "actual": "all present",
+      "passed": true,
+      "message": "All 4 required fields are present.",
+      "outcome": "passed",
+      "expected": "po_number, vendor_name, total_amount, currency"
+    }
+  ],
+  "validated_at": "2026-08-28T19:34:47.307803+00:00"
+}

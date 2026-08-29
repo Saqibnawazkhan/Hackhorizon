@@ -1,0 +1,39 @@
+{
+  "stats": [
+    {
+      "key": "active_workflows",
+      "label": "Active workflows",
+      "value": "2",
+      "numeric_value": 2,
+      "tone": "neutral"
+    },
+    {
+      "key": "pending_approvals",
+      "label": "Pending approvals",
+      "value": "3",
+      "numeric_value": 3,
+      "tone": "warning"
+    },
+    {
+      "key": "completed",
+      "label": "Completed this week",
+      "value": "1",
+      "numeric_value": 1,
+      "tone": "positive"
+    },
+    {
+      "key": "flagged_vendors",
+      "label": "Flagged vendors",
+      "value": "1",
+      "numeric_value": 1,
+      "tone": "danger"
+    }
+  ],
+  "pending_approvals": 3,
+  "active_workflows": 2,
+  "completed_this_week": 1,
+  "flagged_vendors": 1,
+  "total_spend": 28710000.0,
+  "currency": "PKR",
+  "generated_at": "2026-08-28T19:52:54.298667+00:00"
+}

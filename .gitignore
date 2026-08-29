@@ -1,0 +1,78 @@
+# =========================================================================
+# AgentFlow
+#
+# The first section is the one that matters. Everything in it can be used to
+# spend money, read the production database, or send push as this project.
+# A secret pushed to GitHub is scraped within minutes and is in the history
+# forever -- rotating it is the only remedy, so it must never go up at all.
+# =========================================================================
+
+# -- credentials ----------------------------------------------------------
+.env
+.env.*
+!.env.example
+*.env
+
+# Firebase Admin service account: can send push and read the whole project.
+firebase-service-account.json
+*-firebase-adminsdk-*.json
+serviceAccountKey.json
+
+# Firebase client config. Not a secret in the same sense -- it ships inside
+# every APK -- but it names the Firebase project, and anyone building this
+# should point it at their own. Run `flutterfire configure` or download it
+# from the console.
+google-services.json
+GoogleService-Info.plist
+
+# Signing
+*.jks
+*.keystore
+key.properties
+
+# Supabase CLI
+.supabase/
+
+# -- python ---------------------------------------------------------------
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+
+# -- flutter / dart -------------------------------------------------------
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+build/
+*.iml
+app/android/.gradle/
+app/android/local.properties
+app/android/key.properties
+app/ios/Pods/
+app/ios/.symlinks/
+app/ios/Flutter/Flutter.framework
+app/ios/Flutter/Flutter.podspec
+app/ios/Flutter/Generated.xcconfig
+app/ios/Flutter/flutter_export_environment.sh
+
+# Golden-test failure output, not the goldens themselves.
+**/failures/
+
+# -- editors / os ---------------------------------------------------------
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# -- local scratch --------------------------------------------------------
+*.log
+/tmp/
+po_overlap_check.pdf

@@ -1,0 +1,407 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   AgentFlow design system — web console
+
+   The palette, radii, blurs and shadow tints below are the same values the
+   Flutter client reads from `app/lib/theme/tokens.dart`, which were extracted
+   from `AgentFlow.dc.html` by frequency analysis. Nothing here is invented:
+   where the design uses rgba(46,96,120,.24) for a card shadow, so do we.
+
+   What IS new is the layout scale. A phone screen and a 1440px console are
+   different instruments playing the same score, so spacing, type sizes and
+   density are re-derived for the desktop while every colour, radius and
+   shadow stays verbatim.
+   ========================================================================== */
+
+@theme {
+  /* -- Brand ------------------------------------------------------------ */
+  --color-turquoise: #447f98;
+  --color-turquoise-600: #3a6d84;
+  --color-turquoise-700: #2f5a6d;
+  --color-brand-slate: #629bb5;
+  --color-platinum: #dadee1;
+  --color-glacier: #b9d8e1;
+  --color-ice: #d6ebf3;
+  --color-deep-turquoise: #38677b;
+  --color-dim-turquoise: #3f6b80;
+
+  /* -- Ink --------------------------------------------------------------- */
+  --color-ink: #243640;
+  --color-ink-vendor: #2e3e47;
+  --color-ink-strong: #101828;
+  --color-muted: #5f7280;
+  --color-subtle: #7e8c94;
+  --color-neutral-text: #4a5c66;
+  --color-bubble-text: #3e505a;
+  --color-disabled: #b3c4cc;
+
+  /* -- Surfaces ---------------------------------------------------------- */
+  --color-divider: #e7eff3;
+  --color-divider-alt: #e3ebef;
+  --color-divider-soft: #dce9ef;
+  --color-clay-base: #f2f7fa;
+  --color-clay-recess: #ddedf4;
+  --color-input-fill: #e9f3f8;
+
+  /* -- Status ------------------------------------------------------------ */
+  --color-success-bg: #ecfdf3;
+  --color-success-fg: #067647;
+  --color-success-border: #a6f4c5;
+  --color-success-solid: #17b26a;
+  --color-warning-bg: #fffaeb;
+  --color-warning-fg: #b54708;
+  --color-warning-border: #fedf89;
+  --color-danger-bg: #fef3f2;
+  --color-danger-fg: #b42318;
+  --color-danger-border: #fecdca;
+  --color-neutral-bg: #e7eff3;
+  --color-neutral-fg: #4a5c66;
+
+  /* -- Radii (verbatim from the design) ---------------------------------- */
+  --radius-card: 28px;
+  --radius-clay: 30px;
+  --radius-panel: 24px;
+  --radius-banner: 20px;
+  --radius-control: 16px;
+  --radius-field: 14px;
+  --radius-chip: 8px;
+
+  /* -- Type -------------------------------------------------------------- */
+  --font-sans: "Instrument Sans", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, "Cascadia Mono", monospace;
+
+  /* -- Motion ------------------------------------------------------------ */
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* --------------------------------------------------------------------------
+   Base
+   -------------------------------------------------------------------------- */
+:root {
+  /* Shadow tints. Glass shadows are tinted rgb(46,96,120), never neutral
+     black — that tint is what keeps the whole surface reading as one
+     material rather than a stack of grey rectangles. */
+  --shadow-tint: 46 96 120;
+  --clay-tint: 68 127 152;
+
+  --shadow-glass: 0 20px 44px rgb(var(--shadow-tint) / 0.24);
+  --shadow-glass-sm: 0 8px 22px rgb(var(--shadow-tint) / 0.08);
+  --shadow-flat: 0 8px 22px rgb(var(--shadow-tint) / 0.05);
+  --shadow-cta: 0 14px 28px rgb(var(--shadow-tint) / 0.32);
+  --shadow-nav: 0 12px 28px rgb(var(--shadow-tint) / 0.18);
+  --shadow-hero: 0 14px 30px rgb(var(--shadow-tint) / 0.18);
+  --shadow-clay: 0 22px 30px rgb(var(--clay-tint) / 0.16);
+  --shadow-clay-sm: 0 8px 14px rgb(var(--clay-tint) / 0.16);
+  --shadow-pop: 0 24px 56px rgb(var(--shadow-tint) / 0.22);
+
+  --gradient-cta: linear-gradient(
+    160deg,
+    rgba(116, 176, 200, 0.95),
+    rgba(52, 104, 128, 0.94)
+  );
+  --gradient-hero: linear-gradient(160deg, #4a83a0, #27485a);
+  --gradient-glass: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.62),
+    rgba(255, 255, 255, 0.22)
+  );
+  --gradient-glass-soft: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0.5)
+  );
+  --gradient-avatar: linear-gradient(135deg, #447f98, #629bb5);
+
+  color-scheme: light;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background-color: #eef5f9;
+  font-feature-settings: "cv02", "cv03", "cv04", "ss01";
+  min-height: 100dvh;
+}
+
+/* The ambient field the glass sits on. Three soft turquoise washes plus a
+   very faint grain — without the grain, large flat areas band on wide
+   displays. Fixed, so scrolling content slides over a stable ground. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(
+      1100px 620px at 12% -8%,
+      rgba(185, 216, 225, 0.72),
+      transparent 62%
+    ),
+    radial-gradient(
+      980px 560px at 96% 4%,
+      rgba(214, 235, 243, 0.85),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 700px at 62% 108%,
+      rgba(98, 155, 181, 0.2),
+      transparent 66%
+    ),
+    linear-gradient(180deg, #f4f9fb 0%, #e8f2f7 48%, #e2eef4 100%);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.4;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+}
+
+::selection {
+  background: rgba(68, 127, 152, 0.2);
+  color: var(--color-ink-strong);
+}
+
+/* --------------------------------------------------------------------------
+   Scrollbars — thin, tinted, never the OS default grey
+   -------------------------------------------------------------------------- */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(68, 127, 152, 0.28) transparent;
+}
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgba(68, 127, 152, 0.24);
+  border-radius: 999px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(68, 127, 152, 0.4);
+  background-clip: content-box;
+}
+
+/* --------------------------------------------------------------------------
+   Surfaces
+
+   `glass` is the primary treatment: a translucent white gradient over a
+   backdrop blur with saturation, a 1px white border, one large tinted drop
+   shadow, and — reproducing the design's two inset highlights — a bright
+   top edge and a faint bottom edge drawn with inset box-shadows.
+
+   `clay` is the vendor-portal treatment: opaque, no blur, extruded with a
+   soft outer shadow plus strong inset shading top and bottom.
+   -------------------------------------------------------------------------- */
+@utility glass {
+  background-image: var(--gradient-glass);
+  background-color: rgba(255, 255, 255, 0.42);
+  backdrop-filter: blur(26px) saturate(1.7);
+  -webkit-backdrop-filter: blur(26px) saturate(1.7);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow:
+    var(--shadow-glass),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.28);
+}
+
+@utility glass-soft {
+  background-image: var(--gradient-glass-soft);
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(20px) saturate(1.6);
+  -webkit-backdrop-filter: blur(20px) saturate(1.6);
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  box-shadow:
+    var(--shadow-nav),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+@utility glass-flat {
+  background-color: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, 0.68);
+  box-shadow: var(--shadow-flat);
+}
+
+@utility clay {
+  background-color: var(--color-clay-base);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow:
+    var(--shadow-clay),
+    inset 0 2px 4px rgba(255, 255, 255, 0.95),
+    inset 0 -3px 8px rgb(var(--clay-tint) / 0.14);
+}
+
+@utility clay-recess {
+  background-color: var(--color-clay-recess);
+  box-shadow:
+    inset 0 2px 5px rgb(var(--clay-tint) / 0.22),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.7);
+}
+
+@utility gradient-cta {
+  background-image: var(--gradient-cta);
+}
+
+@utility gradient-hero {
+  background-image: var(--gradient-hero);
+}
+
+@utility gradient-avatar {
+  background-image: var(--gradient-avatar);
+}
+
+/* Numeric columns: tabular figures so amounts align down a table. */
+@utility tnum {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* --------------------------------------------------------------------------
+   Motion
+   -------------------------------------------------------------------------- */
+@keyframes af-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes af-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes af-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.97) translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes af-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes af-pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(68, 127, 152, 0.45);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(68, 127, 152, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(68, 127, 152, 0);
+  }
+}
+
+@utility animate-fade-up {
+  animation: af-fade-up 0.45s var(--ease-out-quint) both;
+}
+@utility animate-fade-in {
+  animation: af-fade 0.3s ease-out both;
+}
+@utility animate-scale-in {
+  animation: af-scale-in 0.28s var(--ease-out-quint) both;
+}
+@utility animate-pulse-ring {
+  animation: af-pulse-ring 1.9s ease-out infinite;
+}
+
+/* A running step gets a light sweeping across its track. */
+@utility running-sweep {
+  position: relative;
+  overflow: hidden;
+}
+@utility skeleton {
+  position: relative;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.skeleton::after,
+.running-sweep::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.85),
+    transparent
+  );
+  animation: af-shimmer 1.6s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Focus — one visible ring everywhere, tinted to the brand
+   -------------------------------------------------------------------------- */
+:focus-visible {
+  outline: 2px solid var(--color-turquoise);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Print: the completion report and the PO are documents people print. */
+@media print {
+  body::before,
+  body::after {
+    display: none;
+  }
+  body {
+    background: #fff;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .glass,
+  .glass-soft,
+  .glass-flat {
+    backdrop-filter: none !important;
+    box-shadow: none !important;
+    border: 1px solid #dbe6ec !important;
+    background: #fff !important;
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "318a350d-63f1-4058-bcc6-0567583c7127",
+  "po_number": "PO-2026-0002",
+  "workflow_id": "8f84f296-c63e-427f-9868-115c67124501",
+  "vendor_id": "00000000-0000-0000-0000-0000000000b1",
+  "quote_id": "b9633a7b-9dbd-4e5b-9599-5888d350b1aa",
+  "subtotal": 8700000.0,
+  "tax": 0.0,
+  "total_amount": 8700000.0,
+  "currency": "PKR",
+  "delivery_days": 7,
+  "expected_delivery_date": "2026-09-04",
+  "warranty_months": 24,
+  "payment_terms": null,
+  "delivery_status": "issued",
+  "generation_attempt": 1,
+  "pdf_url": null,
+  "created_at": "2026-08-28T19:34:38.448485+00:00",
+  "line_items": [
+    {
+      "line_number": 1,
+      "description": "Dell Latitude 5550 laptop",
+      "sku": "TS-LAT-5550",
+      "quantity": 50,
+      "unit_price": 174000.0,
+      "line_total": 8700000.0
+    }
+  ]
+}

@@ -1,0 +1,208 @@
+{
+  "workflow_id": "ae80ca47-cc89-44e4-83f3-3029abaf08be",
+  "quotes": [
+    {
+      "id": "f6cdb902-e3ce-4573-99d0-0cadf0631652",
+      "vendor_id": "00000000-0000-0000-0000-0000000000b1",
+      "vendor_name": "TechSupplies Ltd",
+      "status": "selected",
+      "exclusion_reason": null,
+      "total_amount": 11310000.0,
+      "currency": "PKR",
+      "delivery_days": 7,
+      "warranty_months": 24,
+      "items_covered": 3,
+      "items_requested": 3,
+      "score_total": 100.0,
+      "score": {
+        "total": 100.0,
+        "components": [
+          {
+            "weight": 0.5,
+            "criterion": "price",
+            "raw_value": 11310000.0,
+            "normalised": 1.0,
+            "was_imputed": false,
+            "contribution": 50.0
+          },
+          {
+            "weight": 0.3,
+            "criterion": "delivery",
+            "raw_value": 7.0,
+            "normalised": 1.0,
+            "was_imputed": false,
+            "contribution": 30.0
+          },
+          {
+            "weight": 0.2,
+            "criterion": "warranty",
+            "raw_value": 24.0,
+            "normalised": 1.0,
+            "was_imputed": false,
+            "contribution": 20.0
+          }
+        ],
+        "confidence": {
+          "label": "data confidence 100%",
+          "percent": 100,
+          "scored_on": [
+            "price",
+            "delivery",
+            "warranty"
+          ],
+          "missing_fields": []
+        }
+      },
+      "confidence_percent": 100,
+      "missing_fields": [],
+      "reliability_score": 4.8,
+      "reliability_has_history": true,
+      "snapshot_taken_at": "2026-08-28T19:35:49.189367+00:00",
+      "lines": [
+        {
+          "request_item_name": "laptops",
+          "matched_title": "Dell Latitude 5550 laptop",
+          "sku": "TS-LAT-5550",
+          "quantity": 50,
+          "available": true,
+          "unit_price": 174000.0,
+          "line_total": 8700000.0,
+          "delivery_days": 7,
+          "warranty_months": 24
+        },
+        {
+          "request_item_name": "CPU kit",
+          "matched_title": "Intel i7-13700 CPU kit",
+          "sku": "TS-CPU-13700",
+          "quantity": 20,
+          "available": true,
+          "unit_price": 96000.0,
+          "line_total": 1920000.0,
+          "delivery_days": 7,
+          "warranty_months": 24
+        },
+        {
+          "request_item_name": "docking kit",
+          "matched_title": "USB-C docking kit",
+          "sku": "TS-DOCK-USBC",
+          "quantity": 60,
+          "available": true,
+          "unit_price": 11500.0,
+          "line_total": 690000.0,
+          "delivery_days": 7,
+          "warranty_months": 24
+        }
+      ]
+    },
+    {
+      "id": "fd943279-d7f0-400e-9479-78d32ce09605",
+      "vendor_id": "00000000-0000-0000-0000-0000000000b3",
+      "vendor_name": "Alpha Traders",
+      "status": "excluded_budget",
+      "exclusion_reason": "Exceeds budget \u2014 excluded",
+      "total_amount": 12840000.0,
+      "currency": "PKR",
+      "delivery_days": 12,
+      "warranty_months": 12,
+      "items_covered": 3,
+      "items_requested": 3,
+      "score_total": null,
+      "score": null,
+      "confidence_percent": null,
+      "missing_fields": [],
+      "reliability_score": 4.2,
+      "reliability_has_history": true,
+      "snapshot_taken_at": "2026-08-28T19:35:49.900033+00:00",
+      "lines": [
+        {
+          "request_item_name": "laptops",
+          "matched_title": "Dell Latitude 5550 laptop",
+          "sku": "AT-LAT-5550",
+          "quantity": 50,
+          "available": true,
+          "unit_price": 210000.0,
+          "line_total": 10500000.0,
+          "delivery_days": 12,
+          "warranty_months": 12
+        },
+        {
+          "request_item_name": "CPU kit",
+          "matched_title": "Intel i7-13700 CPU kit",
+          "sku": "AT-CPU-13700",
+          "quantity": 20,
+          "available": true,
+          "unit_price": 87000.0,
+          "line_total": 1740000.0,
+          "delivery_days": 12,
+          "warranty_months": 12
+        },
+        {
+          "request_item_name": "docking kit",
+          "matched_title": "USB-C docking kit",
+          "sku": "AT-DOCK-USBC",
+          "quantity": 60,
+          "available": true,
+          "unit_price": 10000.0,
+          "line_total": 600000.0,
+          "delivery_days": 12,
+          "warranty_months": 12
+        }
+      ]
+    },
+    {
+      "id": "0407828c-0505-40a3-abd4-8e17f0738aaf",
+      "vendor_id": "00000000-0000-0000-0000-0000000000b2",
+      "vendor_name": "Metro Computers",
+      "status": "excluded_coverage",
+      "exclusion_reason": "Partial coverage \u2014 cannot fulfil the whole order alone",
+      "total_amount": 9760000.0,
+      "currency": "PKR",
+      "delivery_days": 10,
+      "warranty_months": 12,
+      "items_covered": 2,
+      "items_requested": 3,
+      "score_total": null,
+      "score": null,
+      "confidence_percent": null,
+      "missing_fields": [],
+      "reliability_score": 4.5,
+      "reliability_has_history": true,
+      "snapshot_taken_at": "2026-08-28T19:35:50.257282+00:00",
+      "lines": [
+        {
+          "request_item_name": "laptops",
+          "matched_title": "Dell Latitude 5550 laptop",
+          "sku": "MC-LAT-5550",
+          "quantity": 50,
+          "available": true,
+          "unit_price": 182000.0,
+          "line_total": 9100000.0,
+          "delivery_days": 10,
+          "warranty_months": 12
+        },
+        {
+          "request_item_name": "CPU kit",
+          "matched_title": null,
+          "sku": null,
+          "quantity": 20,
+          "available": false,
+          "unit_price": null,
+          "line_total": null,
+          "delivery_days": null,
+          "warranty_months": null
+        },
+        {
+          "request_item_name": "docking kit",
+          "matched_title": "USB-C docking kit",
+          "sku": "MC-DOCK-USBC",
+          "quantity": 60,
+          "available": true,
+          "unit_price": 11000.0,
+          "line_total": 660000.0,
+          "delivery_days": 10,
+          "warranty_months": 12
+        }
+      ]
+    }
+  ]
+}

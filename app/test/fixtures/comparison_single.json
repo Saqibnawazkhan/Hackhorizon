@@ -1,0 +1,180 @@
+{
+  "workflow_id": "8f84f296-c63e-427f-9868-115c67124501",
+  "quotes": [
+    {
+      "id": "b9633a7b-9dbd-4e5b-9599-5888d350b1aa",
+      "vendor_id": "00000000-0000-0000-0000-0000000000b1",
+      "vendor_name": "TechSupplies Ltd",
+      "status": "selected",
+      "exclusion_reason": null,
+      "total_amount": 8700000.0,
+      "currency": "PKR",
+      "delivery_days": 7,
+      "warranty_months": 24,
+      "items_covered": 1,
+      "items_requested": 1,
+      "score_total": 100.0,
+      "score": {
+        "total": 100.0,
+        "components": [
+          {
+            "weight": 0.5,
+            "criterion": "price",
+            "raw_value": 8700000.0,
+            "normalised": 1.0,
+            "was_imputed": false,
+            "contribution": 50.0
+          },
+          {
+            "weight": 0.3,
+            "criterion": "delivery",
+            "raw_value": 7.0,
+            "normalised": 1.0,
+            "was_imputed": false,
+            "contribution": 30.0
+          },
+          {
+            "weight": 0.2,
+            "criterion": "warranty",
+            "raw_value": 24.0,
+            "normalised": 1.0,
+            "was_imputed": false,
+            "contribution": 20.0
+          }
+        ],
+        "confidence": {
+          "label": "data confidence 100%",
+          "percent": 100,
+          "scored_on": [
+            "price",
+            "delivery",
+            "warranty"
+          ],
+          "missing_fields": []
+        }
+      },
+      "confidence_percent": 100,
+      "missing_fields": [],
+      "reliability_score": 4.8,
+      "reliability_has_history": true,
+      "snapshot_taken_at": "2026-08-28T19:34:10.498517+00:00",
+      "lines": [
+        {
+          "request_item_name": "laptops",
+          "matched_title": "Dell Latitude 5550 laptop",
+          "sku": "TS-LAT-5550",
+          "quantity": 50,
+          "available": true,
+          "unit_price": 174000.0,
+          "line_total": 8700000.0,
+          "delivery_days": 7,
+          "warranty_months": 24
+        }
+      ]
+    },
+    {
+      "id": "01925344-ed46-40fb-9f57-670e9f9659f3",
+      "vendor_id": "00000000-0000-0000-0000-0000000000b2",
+      "vendor_name": "Metro Computers",
+      "status": "quoted",
+      "exclusion_reason": null,
+      "total_amount": 9100000.0,
+      "currency": "PKR",
+      "delivery_days": 10,
+      "warranty_months": 12,
+      "items_covered": 1,
+      "items_requested": 1,
+      "score_total": 78.8,
+      "score": {
+        "total": 78.8,
+        "components": [
+          {
+            "weight": 0.5,
+            "criterion": "price",
+            "raw_value": 9100000.0,
+            "normalised": 0.956044,
+            "was_imputed": false,
+            "contribution": 47.8
+          },
+          {
+            "weight": 0.3,
+            "criterion": "delivery",
+            "raw_value": 10.0,
+            "normalised": 0.7,
+            "was_imputed": false,
+            "contribution": 21.0
+          },
+          {
+            "weight": 0.2,
+            "criterion": "warranty",
+            "raw_value": 12.0,
+            "normalised": 0.5,
+            "was_imputed": false,
+            "contribution": 10.0
+          }
+        ],
+        "confidence": {
+          "label": "data confidence 100%",
+          "percent": 100,
+          "scored_on": [
+            "price",
+            "delivery",
+            "warranty"
+          ],
+          "missing_fields": []
+        }
+      },
+      "confidence_percent": 100,
+      "missing_fields": [],
+      "reliability_score": 4.5,
+      "reliability_has_history": true,
+      "snapshot_taken_at": "2026-08-28T19:34:11.189287+00:00",
+      "lines": [
+        {
+          "request_item_name": "laptops",
+          "matched_title": "Dell Latitude 5550 laptop",
+          "sku": "MC-LAT-5550",
+          "quantity": 50,
+          "available": true,
+          "unit_price": 182000.0,
+          "line_total": 9100000.0,
+          "delivery_days": 10,
+          "warranty_months": 12
+        }
+      ]
+    },
+    {
+      "id": "d583e9ec-764e-42fd-84d4-9d9057eae85b",
+      "vendor_id": "00000000-0000-0000-0000-0000000000b3",
+      "vendor_name": "Alpha Traders",
+      "status": "excluded_budget",
+      "exclusion_reason": "Exceeds budget \u2014 excluded",
+      "total_amount": 10500000.0,
+      "currency": "PKR",
+      "delivery_days": 12,
+      "warranty_months": 12,
+      "items_covered": 1,
+      "items_requested": 1,
+      "score_total": null,
+      "score": null,
+      "confidence_percent": null,
+      "missing_fields": [],
+      "reliability_score": 4.2,
+      "reliability_has_history": true,
+      "snapshot_taken_at": "2026-08-28T19:34:11.539749+00:00",
+      "lines": [
+        {
+          "request_item_name": "laptops",
+          "matched_title": "Dell Latitude 5550 laptop",
+          "sku": "AT-LAT-5550",
+          "quantity": 50,
+          "available": true,
+          "unit_price": 210000.0,
+          "line_total": 10500000.0,
+          "delivery_days": 12,
+          "warranty_months": 12
+        }
+      ]
+    }
+  ]
+}

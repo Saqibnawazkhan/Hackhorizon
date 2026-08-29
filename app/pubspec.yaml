@@ -1,0 +1,67 @@
+name: agentflow
+description: Agentic AI for autonomous business workflow execution.
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.9.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # State
+  flutter_riverpod: ^2.6.1
+  riverpod_annotation: ^2.6.1
+
+  # Networking
+  dio: ^5.7.0
+  web_socket_channel: ^3.0.1
+
+  # Backend
+  supabase_flutter: ^2.8.0
+
+  # Notifications
+  firebase_core: ^3.8.0
+  firebase_messaging: ^15.1.5
+  flutter_local_notifications: ^18.0.1
+
+  # Files / import
+  file_picker: ^8.1.6
+
+  # Opening the signed purchase-order PDF in the device viewer. The bucket is
+  # private, so the URL is short-lived and carries its own authorisation --
+  # which is what lets an external viewer open it without our bearer token.
+  url_launcher: ^6.3.1
+
+  # UI
+  intl: ^0.19.0
+
+  # Storage
+  shared_preferences: ^2.3.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  build_runner: ^2.4.13
+  riverpod_generator: ^2.6.2
+  custom_lint: ^0.7.0
+  riverpod_lint: ^2.6.2
+
+flutter:
+  uses-material-design: true
+
+  # Instrument Sans is bundled rather than fetched at runtime: the design
+  # depends on it, and a demo must not need network at first paint.
+  fonts:
+    - family: InstrumentSans
+      fonts:
+        - asset: assets/fonts/InstrumentSans-400.ttf
+          weight: 400
+        - asset: assets/fonts/InstrumentSans-500.ttf
+          weight: 500
+        - asset: assets/fonts/InstrumentSans-600.ttf
+          weight: 600
+        - asset: assets/fonts/InstrumentSans-700.ttf
+          weight: 700

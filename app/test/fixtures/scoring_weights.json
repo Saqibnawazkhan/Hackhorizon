@@ -1,0 +1,9 @@
+{
+  "price": 0.5,
+  "delivery": 0.3,
+  "warranty": 0.2,
+  "reliability": 0.0,
+  "label": "Price 50% \u00b7 Delivery 30% \u00b7 Warranty 20%",
+  "is_default": false,
+  "org_id": "00000000-0000-0000-0000-0000000000a1"
+}

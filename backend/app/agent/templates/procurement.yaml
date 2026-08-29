@@ -1,0 +1,114 @@
+# =========================================================================
+# Procurement workflow template.
+#
+# Adding a workflow type means adding a file like this one. The engine reads
+# nodes, edges and tool keys from here; it has no per-type branching.
+#
+# Node handlers are looked up in the node registry by `handler`. Tools are
+# looked up in the tool registry by `tool`. Neither is imported by name in the
+# engine, so a new template can compose existing handlers and tools with no
+# Python change at all.
+# =========================================================================
+name: procurement
+version: 1
+title: Procurement
+description: >
+  Buy goods from vendor catalogs: quote, filter by budget, score, select,
+  raise a purchase order, validate it, and route it to a human approver.
+
+# Which scoring strategy applies. `auto` lets the registry pick by request
+# shape (single item -> MODE A, multiple items -> MODE B).
+scoring_strategy: auto
+
+settings:
+  # Overrides app config for this workflow type only. Omit to inherit.
+  max_self_correction_attempts: null   # inherit AGENT_MAX_SELF_CORRECTION_ATTEMPTS
+  tool_max_attempts: null              # inherit AGENT_TOOL_MAX_ATTEMPTS
+
+entry: create_request
+terminal: [completed, escalated, rejected]
+
+nodes:
+  - name: create_request
+    title: Create request
+    description: Record the request, its line items and its budget.
+    handler: create_request
+
+  - name: fetch_quotes
+    title: Fetch quotes
+    description: Read vendor catalogs and snapshot each vendor's terms.
+    handler: fetch_quotes
+    tool: catalog_query
+
+  - name: budget_filter
+    title: Filter by budget
+    description: Separate qualifying suppliers from those over the ceiling.
+    handler: budget_filter
+
+  - name: score_rank
+    title: Score and rank
+    description: Weighted comparison of the qualifying suppliers.
+    handler: score_rank
+
+  - name: select_best
+    title: Select best option
+    description: Choose the winner and generate a plain-language justification.
+    handler: select_best
+
+  - name: generate_po
+    title: Generate PO
+    description: Build the purchase order from the selected quote snapshot.
+    handler: generate_po
+    tool: po_generator
+
+  - name: validate_po
+    title: Validate PO
+    description: Check budget, quantities, supplier consistency and totals.
+    handler: validate_po
+
+  - name: route_approval
+    title: Route for approval
+    description: Pause for a human decision. The agent never approves spend.
+    handler: route_approval
+    tool: notification
+    interrupt: true          # LangGraph interrupt(); resumes from checkpoint
+
+  - name: flag_for_human
+    title: Flag for human review
+    description: No qualifying supplier, or self-correction exhausted.
+    handler: flag_for_human
+    tool: notification
+
+edges:
+  - from: create_request
+    to: fetch_quotes
+  - from: fetch_quotes
+    to: budget_filter
+
+  # Zero qualifying vendors must never fall through to PO generation.
+  - from: budget_filter
+    conditional: has_qualifying_vendors
+    branches:
+      "true": score_rank
+      "false": flag_for_human
+
+  - from: score_rank
+    to: select_best
+  - from: select_best
+    to: generate_po
+  - from: generate_po
+    to: validate_po
+
+  # Self-correction: a failed validation sends the PO back to be rebuilt,
+  # up to the configured attempt limit, then escalates to a human.
+  - from: validate_po
+    conditional: validation_outcome
+    branches:
+      passed: route_approval
+      retry: generate_po
+      escalate: flag_for_human
+
+  - from: route_approval
+    to: END
+  - from: flag_for_human
+    to: END

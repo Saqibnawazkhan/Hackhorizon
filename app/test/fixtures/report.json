@@ -1,0 +1,79 @@
+{
+  "workflow_id": "8f84f296-c63e-427f-9868-115c67124501",
+  "title": "Laptop procurement \u2014 50 units",
+  "headline": "Laptop procurement \u2014 50 units routed to TechSupplies Ltd",
+  "metrics": [
+    {
+      "label": "Status",
+      "value": "completed",
+      "emphasis": true
+    },
+    {
+      "label": "Order total",
+      "value": "PKR 8,700,000",
+      "emphasis": true
+    },
+    {
+      "label": "Suppliers compared",
+      "value": "3"
+    },
+    {
+      "label": "Steps executed",
+      "value": "8"
+    },
+    {
+      "label": "Tool calls",
+      "value": "4"
+    },
+    {
+      "label": "Duration",
+      "value": "73.3s"
+    }
+  ],
+  "sections": [
+    {
+      "heading": "What was requested",
+      "body": "Create a purchase request for 50 laptops under PKR 10 million, compare three suppliers, identify the best option, prepare the purchase order, and send it for approval.",
+      "bullets": []
+    },
+    {
+      "heading": "What the agent did",
+      "body": "Executed 8 steps and 4 tool calls, comparing 3 supplier(s).",
+      "bullets": [
+        "Create request \u2014 completed (4009ms)",
+        "Fetch quotes \u2014 completed (7006ms)",
+        "Filter by budget \u2014 completed (1922ms)",
+        "Score and rank \u2014 completed (4922ms)",
+        "Select best option \u2014 completed (2597ms)",
+        "Generate PO \u2014 completed (6967ms)",
+        "Validate PO \u2014 completed (4179ms)",
+        "Route for approval \u2014 completed (7605ms)"
+      ]
+    },
+    {
+      "heading": "Decision",
+      "body": "Selected TechSupplies Ltd at PKR 8,700,000.",
+      "bullets": [
+        "TechSupplies Ltd: score 100.00",
+        "Metro Computers: score 78.80",
+        "Alpha Traders: Exceeds budget \u2014 excluded"
+      ]
+    }
+  ],
+  "decisions": [
+    "laptops x 50",
+    "3 supplier(s) quoted",
+    "2 of 3 supplier(s) within budget; 1 excluded",
+    "Ranked 3 supplier(s)",
+    "Selected TechSupplies Ltd",
+    "PO-2026-0002 (attempt 1)",
+    "5 of 5 checks passed",
+    "Decision: approved"
+  ],
+  "caveats": [],
+  "total_duration_ms": 73349,
+  "steps_executed": 8,
+  "tools_invoked": 4,
+  "retries_performed": 0,
+  "generated_at": "2026-08-28T19:52:44.684016+00:00"
+}

@@ -1,0 +1,256 @@
+{
+  "id": "8f84f296-c63e-427f-9868-115c67124501",
+  "title": "Laptop procurement \u2014 50 units",
+  "request_text": "Create a purchase request for 50 laptops under PKR 10 million, compare three suppliers, identify the best option, prepare the purchase order, and send it for approval.",
+  "workflow_type": "procurement",
+  "status": "completed",
+  "currency": "PKR",
+  "budget": 10000000.0,
+  "total_amount": null,
+  "entities": {
+    "items": [
+      {
+        "name": "laptops",
+        "quantity": 50
+      }
+    ],
+    "budget": "10000000",
+    "currency": "PKR",
+    "workflow_type": "procurement"
+  },
+  "plan": [
+    {
+      "name": "create_request",
+      "order": 1,
+      "title": "Create request",
+      "tool_name": null,
+      "description": "Record the request, its line items and its budget."
+    },
+    {
+      "name": "fetch_quotes",
+      "order": 2,
+      "title": "Fetch quotes",
+      "tool_name": "catalog_query",
+      "description": "Read vendor catalogs and snapshot each vendor's terms."
+    },
+    {
+      "name": "budget_filter",
+      "order": 3,
+      "title": "Filter by budget",
+      "tool_name": null,
+      "description": "Separate qualifying suppliers from those over the ceiling."
+    },
+    {
+      "name": "score_rank",
+      "order": 4,
+      "title": "Score and rank",
+      "tool_name": null,
+      "description": "Weighted comparison of the qualifying suppliers."
+    },
+    {
+      "name": "select_best",
+      "order": 5,
+      "title": "Select best option",
+      "tool_name": null,
+      "description": "Choose the winner and generate a plain-language justification."
+    },
+    {
+      "name": "generate_po",
+      "order": 6,
+      "title": "Generate PO",
+      "tool_name": "po_generator",
+      "description": "Build the purchase order from the selected quote snapshot."
+    },
+    {
+      "name": "validate_po",
+      "order": 7,
+      "title": "Validate PO",
+      "tool_name": null,
+      "description": "Check budget, quantities, supplier consistency and totals."
+    },
+    {
+      "name": "route_approval",
+      "order": 8,
+      "title": "Route for approval",
+      "tool_name": "notification",
+      "description": "Pause for a human decision. The agent never approves spend."
+    }
+  ],
+  "summary": "Create a purchase request for 50 laptops under PKR 10 million, compare three suppliers, identify the best option, prepare the purchase order, and send it for approval.",
+  "current_step_order": null,
+  "self_correction_attempts": 0,
+  "escalation_reason": null,
+  "progress_percent": 100,
+  "created_at": "2026-08-28T19:33:59.551928+00:00",
+  "completed_at": "2026-08-28T19:35:08.793929+00:00",
+  "duration_ms": 73349,
+  "steps": [
+    {
+      "id": "9f466b73-e9ba-46be-8c6b-e44141116d65",
+      "step_order": 1,
+      "name": "create_request",
+      "title": "Create request",
+      "description": "Record the request, its line items and its budget.",
+      "tool_name": null,
+      "status": "completed",
+      "retry_count": 0,
+      "max_retries": 3,
+      "duration_ms": 4009,
+      "error": null,
+      "started_at": "2026-08-28T19:33:59.841856+00:00",
+      "completed_at": "2026-08-28T19:34:03.850857+00:00",
+      "tool_calls": []
+    },
+    {
+      "id": "d7b36891-5b5a-45d4-b435-3881662d40fd",
+      "step_order": 2,
+      "name": "fetch_quotes",
+      "title": "Fetch quotes",
+      "description": "Read vendor catalogs and snapshot each vendor's terms.",
+      "tool_name": "catalog_query",
+      "status": "completed",
+      "retry_count": 0,
+      "max_retries": 3,
+      "duration_ms": 7006,
+      "error": null,
+      "started_at": "2026-08-28T19:34:05.754736+00:00",
+      "completed_at": "2026-08-28T19:34:12.761301+00:00",
+      "tool_calls": [
+        {
+          "id": "ed4c7383-cc53-47c7-aa92-09c6f8136213",
+          "tool_name": "catalog_query",
+          "status": "success",
+          "attempt": 1,
+          "retry_count": 0,
+          "duration_ms": 1624,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "cb4023ba-eafb-4ade-ae90-29c6bb2443b8",
+      "step_order": 3,
+      "name": "budget_filter",
+      "title": "Filter by budget",
+      "description": "Separate qualifying suppliers from those over the ceiling.",
+      "tool_name": null,
+      "status": "completed",
+      "retry_count": 0,
+      "max_retries": 3,
+      "duration_ms": 1922,
+      "error": null,
+      "started_at": "2026-08-28T19:34:14.690735+00:00",
+      "completed_at": "2026-08-28T19:34:16.613088+00:00",
+      "tool_calls": []
+    },
+    {
+      "id": "db9f43be-0744-4b93-81e7-8e5174308ec7",
+      "step_order": 4,
+      "name": "score_rank",
+      "title": "Score and rank",
+      "description": "Weighted comparison of the qualifying suppliers.",
+      "tool_name": null,
+      "status": "completed",
+      "retry_count": 0,
+      "max_retries": 3,
+      "duration_ms": 4922,
+      "error": null,
+      "started_at": "2026-08-28T19:34:18.534984+00:00",
+      "completed_at": "2026-08-28T19:34:23.457435+00:00",
+      "tool_calls": []
+    },
+    {
+      "id": "8a703811-221d-4dbe-85a3-c9e199912caf",
+      "step_order": 5,
+      "name": "select_best",
+      "title": "Select best option",
+      "description": "Choose the winner and generate a plain-language justification.",
+      "tool_name": null,
+      "status": "completed",
+      "retry_count": 0,
+      "max_retries": 3,
+      "duration_ms": 2597,
+      "error": null,
+      "started_at": "2026-08-28T19:34:25.382490+00:00",
+      "completed_at": "2026-08-28T19:34:27.979563+00:00",
+      "tool_calls": []
+    },
+    {
+      "id": "669c0815-3a2b-4dd0-ab17-57ae0a3e7982",
+      "step_order": 6,
+      "name": "generate_po",
+      "title": "Generate PO",
+      "description": "Build the purchase order from the selected quote snapshot.",
+      "tool_name": "po_generator",
+      "status": "completed",
+      "retry_count": 0,
+      "max_retries": 3,
+      "duration_ms": 6967,
+      "error": null,
+      "started_at": "2026-08-28T19:34:29.917640+00:00",
+      "completed_at": "2026-08-28T19:34:36.885427+00:00",
+      "tool_calls": [
+        {
+          "id": "98efa3c2-8d00-4139-87b4-6489c6fb4328",
+          "tool_name": "po_generator",
+          "status": "success",
+          "attempt": 1,
+          "retry_count": 0,
+          "duration_ms": 1081,
+          "error": null
+        }
+      ]
+    },
+    {
+      "id": "96685bfa-37bc-4d0d-9d3b-cac8164c9458",
+      "step_order": 7,
+      "name": "validate_po",
+      "title": "Validate PO",
+      "description": "Check budget, quantities, supplier consistency and totals.",
+      "tool_name": null,
+      "status": "completed",
+      "retry_count": 0,
+      "max_retries": 3,
+      "duration_ms": 4179,
+      "error": null,
+      "started_at": "2026-08-28T19:34:38.773024+00:00",
+      "completed_at": "2026-08-28T19:34:42.952353+00:00",
+      "tool_calls": []
+    },
+    {
+      "id": "e3dae6c2-382f-40cb-a7a7-0af1a8dc7a37",
+      "step_order": 8,
+      "name": "route_approval",
+      "title": "Route for approval",
+      "description": "Pause for a human decision. The agent never approves spend.",
+      "tool_name": "notification",
+      "status": "completed",
+      "retry_count": 0,
+      "max_retries": 3,
+      "duration_ms": 7605,
+      "error": null,
+      "started_at": "2026-08-28T19:35:02.224801+00:00",
+      "completed_at": "2026-08-28T19:35:09.830250+00:00",
+      "tool_calls": [
+        {
+          "id": "df9a94d8-c830-4be8-8d7f-6c05a6e04893",
+          "tool_name": "notification",
+          "status": "success",
+          "attempt": 1,
+          "retry_count": 0,
+          "duration_ms": 0,
+          "error": null
+        },
+        {
+          "id": "aebb3133-6eb1-4538-b46e-055b36e2bcca",
+          "tool_name": "notification",
+          "status": "success",
+          "attempt": 1,
+          "retry_count": 0,
+          "duration_ms": 0,
+          "error": null
+        }
+      ]
+    }
+  ]
+}

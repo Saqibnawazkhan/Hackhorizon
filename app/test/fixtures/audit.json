@@ -1,0 +1,142 @@
+[
+  {
+    "at": "2026-08-28T19:33:59.551928+00:00",
+    "source": "system",
+    "actor": "requester",
+    "event": "Workflow created",
+    "detail": "Create a purchase request for 50 laptops under PKR 10 million, compare three suppliers, identify the best option, prepare the purchase order, and send it for approval.",
+    "status": "draft",
+    "duration_ms": null,
+    "reference_id": "8f84f296-c63e-427f-9868-115c67124501"
+  },
+  {
+    "at": "2026-08-28T19:33:59.841856+00:00",
+    "source": "step",
+    "actor": "agent",
+    "event": "Create request",
+    "detail": "Record the request, its line items and its budget.",
+    "status": "completed",
+    "duration_ms": 4009,
+    "reference_id": "9f466b73-e9ba-46be-8c6b-e44141116d65"
+  },
+  {
+    "at": "2026-08-28T19:34:05.754736+00:00",
+    "source": "step",
+    "actor": "agent",
+    "event": "Fetch quotes",
+    "detail": "Read vendor catalogs and snapshot each vendor's terms.",
+    "status": "completed",
+    "duration_ms": 7006,
+    "reference_id": "d7b36891-5b5a-45d4-b435-3881662d40fd"
+  },
+  {
+    "at": "2026-08-28T19:34:09.283022+00:00",
+    "source": "tool_call",
+    "actor": "agent",
+    "event": "Tool: catalog_query",
+    "detail": "ok",
+    "status": "success",
+    "duration_ms": 1624,
+    "reference_id": "ed4c7383-cc53-47c7-aa92-09c6f8136213"
+  },
+  {
+    "at": "2026-08-28T19:34:14.690735+00:00",
+    "source": "step",
+    "actor": "agent",
+    "event": "Filter by budget",
+    "detail": "Separate qualifying suppliers from those over the ceiling.",
+    "status": "completed",
+    "duration_ms": 1922,
+    "reference_id": "cb4023ba-eafb-4ade-ae90-29c6bb2443b8"
+  },
+  {
+    "at": "2026-08-28T19:34:18.534984+00:00",
+    "source": "step",
+    "actor": "agent",
+    "event": "Score and rank",
+    "detail": "Weighted comparison of the qualifying suppliers.",
+    "status": "completed",
+    "duration_ms": 4922,
+    "reference_id": "db9f43be-0744-4b93-81e7-8e5174308ec7"
+  },
+  {
+    "at": "2026-08-28T19:34:25.382490+00:00",
+    "source": "step",
+    "actor": "agent",
+    "event": "Select best option",
+    "detail": "Choose the winner and generate a plain-language justification.",
+    "status": "completed",
+    "duration_ms": 2597,
+    "reference_id": "8a703811-221d-4dbe-85a3-c9e199912caf"
+  },
+  {
+    "at": "2026-08-28T19:34:29.917640+00:00",
+    "source": "step",
+    "actor": "agent",
+    "event": "Generate PO",
+    "detail": "Build the purchase order from the selected quote snapshot.",
+    "status": "completed",
+    "duration_ms": 6967,
+    "reference_id": "669c0815-3a2b-4dd0-ab17-57ae0a3e7982"
+  },
+  {
+    "at": "2026-08-28T19:34:34.978509+00:00",
+    "source": "tool_call",
+    "actor": "agent",
+    "event": "Tool: po_generator",
+    "detail": "ok",
+    "status": "success",
+    "duration_ms": 1081,
+    "reference_id": "98efa3c2-8d00-4139-87b4-6489c6fb4328"
+  },
+  {
+    "at": "2026-08-28T19:34:38.773024+00:00",
+    "source": "step",
+    "actor": "agent",
+    "event": "Validate PO",
+    "detail": "Check budget, quantities, supplier consistency and totals.",
+    "status": "completed",
+    "duration_ms": 4179,
+    "reference_id": "96685bfa-37bc-4d0d-9d3b-cac8164c9458"
+  },
+  {
+    "at": "2026-08-28T19:34:50.063556+00:00",
+    "source": "tool_call",
+    "actor": "agent",
+    "event": "Tool: notification",
+    "detail": "ok",
+    "status": "success",
+    "duration_ms": 0,
+    "reference_id": "df9a94d8-c830-4be8-8d7f-6c05a6e04893"
+  },
+  {
+    "at": "2026-08-28T19:35:02.224801+00:00",
+    "source": "step",
+    "actor": "agent",
+    "event": "Route for approval",
+    "detail": "Pause for a human decision. The agent never approves spend.",
+    "status": "completed",
+    "duration_ms": 7605,
+    "reference_id": "e3dae6c2-382f-40cb-a7a7-0af1a8dc7a37"
+  },
+  {
+    "at": "2026-08-28T19:35:05.684919+00:00",
+    "source": "tool_call",
+    "actor": "agent",
+    "event": "Tool: notification",
+    "detail": "ok",
+    "status": "success",
+    "duration_ms": 0,
+    "reference_id": "aebb3133-6eb1-4538-b46e-055b36e2bcca"
+  },
+  {
+    "at": "2026-08-28T19:35:10.754629+00:00",
+    "source": "approval",
+    "actor": "agent",
+    "event": "Routed for human approval",
+    "detail": null,
+    "status": "pending",
+    "duration_ms": null,
+    "reference_id": "498c613b-2dec-40be-a6e8-af08451f86a0"
+  }
+]

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Android 9+ blocks cleartext HTTP by default, which is correct.
+
+  Development needs one exception: the backend reached over `adb reverse`
+  appears to the phone as http://localhost:8000. That is a USB tunnel to the
+  developer's machine, not a network hop, so the traffic never leaves the
+  cable.
+
+  The exception is scoped to loopback and the emulator alias ONLY. Every other
+  host still requires HTTPS, so a deployed API cannot accidentally be talked to
+  in the clear.
+-->
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <!-- adb reverse tunnel to the host machine -->
+        <domain includeSubdomains="false">localhost</domain>
+        <domain includeSubdomains="false">127.0.0.1</domain>
+        <!-- the Android emulator's alias for the host -->
+        <domain includeSubdomains="false">10.0.2.2</domain>
+    </domain-config>
+
+    <!-- Everything else: HTTPS only. -->
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>

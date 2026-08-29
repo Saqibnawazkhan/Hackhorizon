@@ -1,0 +1,92 @@
+# =========================================================================
+# Travel reimbursement workflow template.
+#
+# This file is the generalizability proof. It is a DIFFERENT domain with
+# DIFFERENT logic -- policy compliance rather than supplier ranking -- and it
+# required no change to the engine, the node runner, the tool registry or the
+# API. Only this file and the policy_check handler are new.
+#
+# Note what it reuses unchanged: create_request, generate_summary (the same
+# po_generator tool, rendering a claim instead of a PO), route_approval with
+# the same human-in-the-loop interrupt, and flag_for_human.
+# =========================================================================
+name: reimbursement
+version: 1
+title: Travel reimbursement
+description: >
+  Reimburse expenses an employee has already incurred: load the applicable
+  expense policy, test every claim line against it, total the compliant lines,
+  and route the claim to a human approver.
+
+# Policy compliance is a scoring strategy like any other -- it implements the
+# same interface, it just answers "is this allowed" rather than "who is best".
+scoring_strategy: policy_compliance
+
+settings:
+  max_self_correction_attempts: 0    # nothing to self-correct; a breach is a fact
+  tool_max_attempts: null
+
+entry: create_request
+terminal: [completed, escalated, rejected]
+
+nodes:
+  - name: create_request
+    title: Create request
+    description: Record the claim and its expense lines.
+    handler: create_request
+
+  - name: load_policy
+    title: Load policy rules
+    description: Read the active expense policy for this org and category.
+    handler: load_policy
+
+  - name: policy_check
+    title: Check policy
+    description: Test each claim line against the applicable limits.
+    handler: policy_check
+
+  - name: compute_total
+    title: Compute payable
+    description: Total the policy-compliant lines and state what was excluded.
+    handler: compute_total
+
+  - name: generate_summary
+    title: Generate summary
+    description: Render the reimbursement claim summary document.
+    handler: generate_summary     # own handler, same po_generator tool
+    tool: po_generator
+
+  - name: route_approval
+    title: Route for approval
+    description: Pause for a human decision. The agent never approves payment.
+    handler: route_approval
+    tool: notification
+    interrupt: true
+
+  - name: flag_for_human
+    title: Flag for human review
+    description: Every claim line breached policy, or no policy is configured.
+    handler: flag_for_human
+    tool: notification
+
+edges:
+  - from: create_request
+    to: load_policy
+  - from: load_policy
+    to: policy_check
+
+  # If nothing survives the policy check there is no claim to pay.
+  - from: policy_check
+    conditional: has_compliant_lines
+    branches:
+      "true": compute_total
+      "false": flag_for_human
+
+  - from: compute_total
+    to: generate_summary
+  - from: generate_summary
+    to: route_approval
+  - from: route_approval
+    to: END
+  - from: flag_for_human
+    to: END
