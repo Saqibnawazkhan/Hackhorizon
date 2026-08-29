@@ -36,8 +36,10 @@ const HIGHLIGHTS = [
 ];
 
 export default function LoginPage() {
-  const { signIn, user, loading, error } = useAuth();
+  const { signIn, signOut, user, loading, error } = useAuth();
   const router = useRouter();
+  /** Set once sign-in succeeds, so only THAT redirects — not an existing session. */
+  const [justSignedIn, setJustSignedIn] = useState(false);
 
   const [role, setRole] = useState<UserRole>("employee");
   const [email, setEmail] = useState("");
@@ -46,9 +48,23 @@ export default function LoginPage() {
   const [submitting, setSubmitting] = useState(false);
   const [localError, setLocalError] = useState<string | null>(null);
 
+  // Only a FRESH sign-in navigates away.
+  //
+  // This used to redirect on any session at all, which meant that once you
+  // had signed in you could never reach this screen again: the Supabase
+  // session is persisted, so opening /login bounced you straight back to your
+  // own dashboard with no way to sign in as anyone else. Switching roles —
+  // the single most common thing to do while demonstrating this product —
+  // required finding the sign-out button in the sidebar first.
+  //
+  // Bouncing a signed-in visitor belongs on `/`, which is a router and has no
+  // content of its own. Asking for /login is a deliberate act, so it is
+  // answered rather than overridden.
   useEffect(() => {
-    if (!loading && user) router.replace(homeRouteFor(user.role));
-  }, [loading, user, router]);
+    if (justSignedIn && !loading && user) {
+      router.replace(homeRouteFor(user.role));
+    }
+  }, [justSignedIn, loading, user, router]);
 
   const vendor = role === "vendor";
 
@@ -72,7 +88,8 @@ export default function LoginPage() {
     setSubmitting(true);
     const ok = await signIn(email, password);
     setSubmitting(false);
-    if (!ok) setLocalError(null); // the provider's `error` carries the reason
+    if (ok) setJustSignedIn(true);
+    else setLocalError(null); // the provider's `error` carries the reason
   };
 
   return (
@@ -160,6 +177,39 @@ export default function LoginPage() {
               ? "Manage your catalog, pricing and incoming purchase orders."
               : "Use a demo account below, or your own credentials."}
           </p>
+
+          {/* Already signed in, and asking for this screen anyway. Almost
+              always means "let me in as somebody else" — so offer both, rather
+              than silently bouncing back to a dashboard they just left. */}
+          {!loading && user && !justSignedIn && (
+            <div className="mt-6 rounded-[20px] border border-[#b9d8e1] bg-[#d6ebf3] px-4 py-3.5">
+              <p className="text-[13px] font-semibold text-[#38677b]">
+                You are already signed in as {user.email ?? "this account"}
+              </p>
+              <p className="mt-0.5 text-[12px] text-[#38677b]/85">
+                Signing in below replaces this session.
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                <Button
+                  size="sm"
+                  onClick={() => router.replace(homeRouteFor(user.role))}
+                >
+                  Continue as {user.role}
+                </Button>
+                <Button
+                  size="sm"
+                  variant="secondary"
+                  onClick={() => {
+                    void signOut();
+                    setEmail("");
+                    setPassword("");
+                  }}
+                >
+                  Sign out
+                </Button>
+              </div>
+            </div>
+          )}
 
           {/* Role selector — fills a demo account and sets the treatment */}
           <div className="mt-7 grid grid-cols-3 gap-1.5 rounded-[16px] bg-white/55 p-1.5 backdrop-blur-md">

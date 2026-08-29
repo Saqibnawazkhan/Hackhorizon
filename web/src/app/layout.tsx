@@ -40,7 +40,14 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="antialiased">
+      {/* Browser extensions (Grammarly, ColorZilla, password managers) inject
+          attributes onto <body> before React hydrates — data-gr-ext-installed,
+          cz-shortcut-listen and friends. React sees the server HTML and the
+          client tree disagree and reports a hydration mismatch that is not
+          ours and cannot be fixed from here. Suppression is scoped to this one
+          element's attributes; it does NOT extend to children, so a real
+          mismatch inside the app still reports normally. */}
+      <body className="antialiased" suppressHydrationWarning>
         <Providers>{children}</Providers>
       </body>
     </html>
