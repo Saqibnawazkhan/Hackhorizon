@@ -26,14 +26,35 @@ class ApiConfig {
 
   final String baseUrl;
 
-  /// 10.0.2.2 is the Android emulator's alias for the host machine's
-  /// localhost. A physical phone cannot reach either and needs a real URL.
+  /// The deployed API, and the default ON PURPOSE.
+  ///
+  /// This used to default to the emulator alias 10.0.2.2, which is right for
+  /// a laptop and catastrophic for a store build: forgetting the dart-define
+  /// on a release bundle shipped an app that could reach nothing, and the
+  /// failure only shows up after upload. Defaulting to production means a
+  /// forgotten flag yields a working app; developing against a local backend
+  /// is the case that has to be stated explicitly, which is the right way
+  /// round.
+  ///
+  ///   flutter run --dart-define=API_BASE_URL=http://127.0.0.1:8000
   static const _default = String.fromEnvironment(
     'API_BASE_URL',
-    defaultValue: 'http://10.0.2.2:8000',
+    defaultValue: 'https://backendhackathon-production-6d2b.up.railway.app',
   );
 
-  factory ApiConfig.fromEnvironment() => const ApiConfig(baseUrl: _default);
+  factory ApiConfig.fromEnvironment() =>
+      ApiConfig(baseUrl: _normalise(_default));
+
+  /// Trailing slashes are the classic paste-from-the-browser mistake: the URL
+  /// bar shows `https://host/`, and concatenating gives `https://host//api/v1`,
+  /// which some proxies 404 rather than normalise.
+  static String _normalise(String url) {
+    var out = url.trim();
+    while (out.endsWith('/')) {
+      out = out.substring(0, out.length - 1);
+    }
+    return out;
+  }
 
   String get apiV1 => '$baseUrl/api/v1';
 
